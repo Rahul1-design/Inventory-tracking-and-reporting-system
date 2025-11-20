@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import Header from '@/app/(components)/Header';
+import Header from '@/app/(dashboard)/(components)/Header';
 
 type UserSetting = {
     label: string;

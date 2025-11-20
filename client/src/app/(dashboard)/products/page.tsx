@@ -3,8 +3,8 @@
 import { useCreateProductMutation, useGetProductsQuery } from '@/state/api';
 import { PlusCircle, SearchIcon } from 'lucide-react';
 import React, { useState } from 'react'
-import Header from '@/app/(components)/Header';
-import Rating from '@/app/(components)/Rating';
+import Header from '@/app/(dashboard)/(components)/Header';
+import Rating from '@/app/(dashboard)/(components)/Rating';
 import CreateProductModal from './CreateProductModal';
 
 type ProductFormData = {
