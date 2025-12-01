@@ -73,6 +73,7 @@ const Sidebar = () => {
 
         <SidebarLink href="/settings" icon={SlidersHorizontal} label="Settings" isCollapsed={isSidebarCollapsed} />
 
+     
 
       </div>
       {/* Footer */}
