@@ -41,14 +41,14 @@ export default function LoginPage() {
 
   return (
     <MDBContainer fluid className="p-0 m-0">
-      <MDBRow className="g-0" style={{ height: "100vh" }}>
+      <MDBRow className="g-0 h-[50vh] md:h-[100vh]" style={{ }}>
 
         {/* LEFT IMAGE */}
         <MDBCol md="6" className="h-100">
           <MDBCardImage
             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
             alt="login form"
-            className="w-100 h-100"
+            className="w-100 h-100 "
             style={{ objectFit: "cover" }}
           />
         </MDBCol>
@@ -56,7 +56,7 @@ export default function LoginPage() {
         {/* RIGHT LOGIN FORM */}
         <MDBCol
           md="6"
-          className="d-flex align-items-center justify-content-center"
+          className="d-flex align-items-center justify-center"
           style={{ background: "white" }}
         >
           <MDBCardBody style={{ width: "80%", maxWidth: "400px" }}>
@@ -104,7 +104,7 @@ export default function LoginPage() {
             </MDBBtn>
 
             <p>
-              Don't have an account?
+              Don&apos;t have an account?
               <a href="/register" style={{ color: "#393f81" }}> Register here</a>
             </p>
           </MDBCardBody>
