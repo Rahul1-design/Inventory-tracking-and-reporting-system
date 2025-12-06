@@ -12,8 +12,12 @@ async function deleteAllData(orderedFileNames: string[]) {
   for (const modelName of modelNames) {
     const model: any = prisma[modelName as keyof typeof prisma];
     if (model) {
-      await model.deleteMany({});
-      console.log(`Cleared data from ${modelName}`);
+      try {
+        await model.deleteMany({});
+        console.log(`Cleared data from ${modelName}`);
+      } catch (error) {
+        console.log(`Skipped ${modelName} (has dependencies)`);
+      }
     } else {
       console.error(
         `Model ${modelName} not found. Please ensure the model name is correctly specified.`
@@ -25,7 +29,23 @@ async function deleteAllData(orderedFileNames: string[]) {
 async function main() {
   const dataDirectory = path.join(__dirname, "seedData");
 
-  const orderedFileNames = [
+  // CORRECT ORDER: Delete children first, then parents
+  const deleteOrder = [
+    "expenseByCategory.json",
+    "expenses.json",
+    "sales.json",
+    "purchases.json",
+    "users.json",
+    "expenseSummary.json",
+    "salesSummary.json",
+    "purchaseSummary.json",
+    "products.json",
+  ];
+
+  await deleteAllData(deleteOrder);
+
+  // CORRECT ORDER: Create parents first, then children
+  const seedOrder = [
     "products.json",
     "expenseSummary.json",
     "sales.json",
@@ -37,9 +57,7 @@ async function main() {
     "expenseByCategory.json",
   ];
 
-  await deleteAllData(orderedFileNames);
-
-  for (const fileName of orderedFileNames) {
+  for (const fileName of seedOrder) {
     const filePath = path.join(dataDirectory, fileName);
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     const modelName = path.basename(fileName, path.extname(fileName));

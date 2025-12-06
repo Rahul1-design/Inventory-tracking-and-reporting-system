@@ -11,6 +11,7 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid())
+  username  String   @unique
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
@@ -21,6 +22,8 @@ model Users {
   name   String
   email  String
 }
+
+// server/prisma/schema.prisma
 
 model Products {
   productId     String      @id
@@ -39,7 +42,7 @@ model Sales {
   quantity    Int
   unitPrice   Float
   totalAmount Float
-  product     Products @relation(fields: [productId], references: [productId])
+  product     Products @relation(fields: [productId], references: [productId], onDelete: Cascade)
 }
 
 model Purchases {
@@ -49,7 +52,7 @@ model Purchases {
   quantity   Int
   unitCost   Float
   totalCost  Float
-  product    Products @relation(fields: [productId], references: [productId])
+  product    Products @relation(fields: [productId], references: [productId], onDelete: Cascade)
 }
 
 model Expenses {

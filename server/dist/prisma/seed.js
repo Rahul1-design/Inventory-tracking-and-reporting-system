@@ -25,8 +25,13 @@ function deleteAllData(orderedFileNames) {
         for (const modelName of modelNames) {
             const model = prisma[modelName];
             if (model) {
-                yield model.deleteMany({});
-                console.log(`Cleared data from ${modelName}`);
+                try {
+                    yield model.deleteMany({});
+                    console.log(`Cleared data from ${modelName}`);
+                }
+                catch (error) {
+                    console.log(`Skipped ${modelName} (has dependencies)`);
+                }
             }
             else {
                 console.error(`Model ${modelName} not found. Please ensure the model name is correctly specified.`);
@@ -37,7 +42,21 @@ function deleteAllData(orderedFileNames) {
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const dataDirectory = path_1.default.join(__dirname, "seedData");
-        const orderedFileNames = [
+        // CORRECT ORDER: Delete children first, then parents
+        const deleteOrder = [
+            "expenseByCategory.json",
+            "expenses.json",
+            "sales.json",
+            "purchases.json",
+            "users.json",
+            "expenseSummary.json",
+            "salesSummary.json",
+            "purchaseSummary.json",
+            "products.json",
+        ];
+        yield deleteAllData(deleteOrder);
+        // CORRECT ORDER: Create parents first, then children
+        const seedOrder = [
             "products.json",
             "expenseSummary.json",
             "sales.json",
@@ -48,8 +67,7 @@ function main() {
             "expenses.json",
             "expenseByCategory.json",
         ];
-        yield deleteAllData(orderedFileNames);
-        for (const fileName of orderedFileNames) {
+        for (const fileName of seedOrder) {
             const filePath = path_1.default.join(dataDirectory, fileName);
             const jsonData = JSON.parse(fs_1.default.readFileSync(filePath, "utf-8"));
             const modelName = path_1.default.basename(fileName, path_1.default.extname(fileName));
