@@ -1,4 +1,4 @@
-# Inventory Management System
+# Inventory Recording and Tracking System
 
 A full-stack Inventory Management System built using **Next.js**, **Express.js**, **TypeScript**, **Redux Toolkit**, **Prisma**, and **PostgreSQL**.  
 The application allows users to manage products, track purchases/sales, and view analytics through a responsive dashboard UI.
