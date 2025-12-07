@@ -30,3 +30,106 @@ body,
     grid-template-rows: repeat(8, 9vh);
   }
 }
+
+/* Dark mode DataGrid fix */
+.dark .MuiDataGrid-root {
+  background-color: #1f2937 !important;
+}
+
+.dark .MuiDataGrid-row {
+  background-color: #1f2937 !important;
+}
+
+.dark .MuiDataGrid-columnHeaders {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-columnHeader {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-columnHeaderTitle {
+  color: #f3f4f6 !important;
+  font-weight: 600 !important;
+}
+
+.dark .MuiDataGrid-columnHeaderTitleContainer {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-cell {
+  color: #e5e7eb !important;
+  border-color: #4b5563 !important;
+}
+
+.dark .MuiDataGrid-footerContainer {
+  background-color: #374151 !important;
+  border-top: 1px solid #4b5563 !important;
+}
+
+.dark .MuiTablePagination-root {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiTablePagination-selectIcon {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiCheckbox-root {
+  color: #9ca3af !important;
+}
+
+.dark .MuiDataGrid-iconSeparator {
+  color: #6b7280 !important;
+}
+
+.dark .MuiDataGrid-menuIcon {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiDataGrid-sortIcon {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiDataGrid-columnHeaders {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-columnHeader {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-columnHeaderRow {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-withBorderColor {
+  border-color: #4b5563 !important;
+}
+
+.dark .MuiDataGrid-filler {
+  background-color: #374151 !important;
+}
+
+.dark .MuiDataGrid-scrollbarFiller {
+  background-color: #374151 !important;
+}
+.dark .MuiDataGrid-columnHeader:hover {
+  background-color: #4b5563 !important;
+}
+
+.dark .MuiDataGrid-columnHeader:hover .MuiDataGrid-sortIcon {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiDataGrid-columnHeader:hover .MuiDataGrid-menuIcon {
+  color: #f3f4f6 !important;
+}
+
+.dark .MuiIconButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .MuiDataGrid-menuIconButton:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
