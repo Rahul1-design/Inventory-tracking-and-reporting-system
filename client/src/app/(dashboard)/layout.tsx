@@ -39,22 +39,28 @@ export default function DashboardLayout({
     }
   }, [isDarkMode]);
 
-  if (!checked) return null;
+  if (!checked) return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+          <p className="text-gray-500">Loading...</p>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     // 4. Add styling for light/dark backgrounds and text colors
     <div
-      className={`${
-        isDarkMode ? "dark" : "light"
-      } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
+      className={`${isDarkMode ? "dark" : "light"
+        } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
     >
       <Sidebar />
-      
+
       {/* 5. Add logic to shift content based on Sidebar state */}
       <main
-        className={`flex flex-col w-full h-full py-7 px-9 bg-gray-50 ${
-          isSidebarCollapsed ? "md:pl-24" : "md:pl-72"
-        } transition-all duration-300 ease-in-out`}
+        className={`flex flex-col w-full h-full py-7 px-9 bg-gray-50 ${isSidebarCollapsed ? "md:pl-24" : "md:pl-72"
+          } transition-all duration-300 ease-in-out`}
       >
         <Navbar />
         {children}
