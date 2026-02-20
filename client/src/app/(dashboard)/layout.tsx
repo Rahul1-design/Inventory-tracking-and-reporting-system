@@ -4,7 +4,7 @@ import Sidebar from "@/app/(dashboard)/(components)/Sidebar";
 import Navbar from "@/app/(dashboard)/(components)/Navbar";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/app/redux"; // Ensure this path matches your redux file name
+import { useAppSelector } from "@/app/redux";
 
 export default function DashboardLayout({
   children,
@@ -13,24 +13,24 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // 1. Get states from Redux
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  // 2. Check Auth
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       router.push("/login");
     } else {
       setChecked(true);
+      // Simulate smooth transition
+      setTimeout(() => setIsLoading(false), 300);
     }
   }, [router]);
 
-  // 3. Apply Dark Mode to the HTML document
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -39,25 +39,21 @@ export default function DashboardLayout({
     }
   }, [isDarkMode]);
 
-  if (!checked) return (
-    <div className="flex items-center justify-center min-h-screen">
+  if (!checked || isLoading) return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
-          <p className="text-gray-500">Loading...</p>
-        </div>
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-600 text-4xl text-center font-bold">Loading Dashboard...</p>
       </div>
     </div>
   );
 
   return (
-    // 4. Add styling for light/dark backgrounds and text colors
     <div
       className={`${isDarkMode ? "dark" : "light"
         } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
     >
       <Sidebar />
-
-      {/* 5. Add logic to shift content based on Sidebar state */}
       <main
         className={`flex flex-col w-full h-full py-7 px-9 bg-gray-50 ${isSidebarCollapsed ? "md:pl-24" : "md:pl-72"
           } transition-all duration-300 ease-in-out`}
